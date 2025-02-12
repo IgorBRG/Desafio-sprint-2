@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // Função para quebrar linha
+function quebraLinha() {
+    document.write("<br>");
+}
+
+// Função para exibir texto na tela
+function exibeTexto(texto) {
+    document.write(texto);
+    quebraLinha();
+}
+
+// Solicita a distância percorrida e o consumo médio do veículo
+let distancia_Percorrida = parseFloat(prompt("Digite a distância percorrida (em km):"));
+while(isNaN(distancia_Percorrida)||distancia_Percorrida<=0){
+    alert("Valor inválido! Digite um número válido.");
+    distancia_Percorrida=parseFloat(prompt("Digite a distância percorrida (em km):"));
+}
+let consumo_Medio = parseFloat(prompt("Digite o consumo médio do veículo (em km/L):"));
+while(isNaN(consumo_Medio)||consumo_Medio<=0){
+    alert("Valor inválido! Digite um número válido.");
+    consumo_Medio = parseFloat(prompt("Digite o consumo médio do veículo (em km/L):"));
+
+}
+
+// Calcula o consumo necessário em litros
+let consumo_Necessario_Litros = parseFloat(distancia_Percorrida / consumo_Medio);
+let palavraConsumo = consumo_Necessario_Litros!=1?"litros":"litro";
+quebraLinha();
+exibeTexto("O consumo necessário é "+consumo_Necessario_Litros.toFixed(2)+" "+palavraConsumo+".");
+
+//Solicita a quantidade de postos
+let quantidade_Postos_Pesquisados = parseInt(prompt("Digite a quantidade de postos pesquisados."));
+while(isNaN(quantidade_Postos_Pesquisados)||quantidade_Postos_Pesquisados<=0){
+    alert("Valor inválido! Digite um número válido.");
+    quantidade_Postos_Pesquisados = parseInt(prompt("Digite a quantidade de postos pesquisados."));
+}
+let soma_Total_Valores_Pesquisados = 0;
+let menor_Valor_pesquisado = Infinity;
+//Laço para solicitar os preços dos combustíveis
+for(let i=0;i<quantidade_Postos_Pesquisados;i++){
+    let valor=parseFloat(prompt("Digite o valor do combustível no posto "+(i+1)+":"));
+    if(!isNaN(valor)){
+        soma_Total_Valores_Pesquisados+=valor;
+        if(valor<menor_Valor_pesquisado){
+            menor_Valor_pesquisado=valor;
+        }
+    }else{
+        alert("Valor inválido! Digite um número válido.");
+        i--
+    }
+
+}
+
+//Calculo da Media
+let media = soma_Total_Valores_Pesquisados/quantidade_Postos_Pesquisados;
+
+exibeTexto("A média dos preços dos combustíveis é R$ "+media.toFixed(2));
+exibeTexto("O menor valor de combustível encontrado foi R$ "+menor_Valor_pesquisado.toFixed(2));
+
+//Calculo do gasto diario 
+let gasto_Diario = 2*(consumo_Necessario_Litros*menor_Valor_pesquisado);
+
+exibeTexto("O gasto diário com combustível é R$ "+gasto_Diario.toFixed(2));
+
+    </script>
+</body>
+</html>
